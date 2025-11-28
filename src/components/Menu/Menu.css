@@ -1,0 +1,29 @@
+.menu {
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+    border: 2px blueviolet solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.dificultades {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.opcion {
+    transition: transform 0.1s ease-out;
+    cursor: pointer;
+}
+
+.opcion:hover {
+    transform: translateY(-10px);
+}

@@ -25,5 +25,19 @@
 }
 
 .opcion:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
+}
+
+
+.option {
+    border: 1px black solid;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

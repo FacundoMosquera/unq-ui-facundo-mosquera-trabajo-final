@@ -11,6 +11,8 @@ export default function Menu() {
     const [preguntas, setPreguntas]       = useState(null);
     const [respondio, setRespondio]       = useState(false);
     const { setDificultad, preguntasTotales, setPreguntasTotales, setPreguntaActual, preguntaActual, preguntasAcertadas, setPreguntasAcertadas } = usePreguntas();
+    const [opcionCorrecta, setOpcionCorrecta] = useState(null);
+    const [opcionSeleccionada, setOpcionSeleccionada] = useState(null)
     
     useEffect(() => {
         fetch("https://preguntados-api.vercel.app/api/difficulty")
@@ -40,6 +42,7 @@ export default function Menu() {
 
     const handleAnswer = (id, option) => {
         setLoading(true);
+        setOpcionSeleccionada(option);
         fetch(`https://preguntados-api.vercel.app/api/answer`,{
             method: "POST",
             headers: {
@@ -53,6 +56,7 @@ export default function Menu() {
         .then(res => res.json())
         .then(data => {
             data.answer ? setPreguntasAcertadas(prev => prev + 1) : null;
+            setOpcionCorrecta(data.answer);
             setRespondio(true);
             })
         .catch(err => console.log("Ocurrió un error al enviar la respuesta", err))
@@ -65,6 +69,8 @@ export default function Menu() {
         } else {
             setPreguntaActual(prev => prev + 1);
             setRespondio(false);
+            setOpcionCorrecta(null);
+            setOpcionSeleccionada(null);
         }
     }
 
@@ -73,6 +79,9 @@ export default function Menu() {
         setPreguntasAcertadas(0);
         setPreguntasTotales(0);
         setPreguntas(null);
+        setRespondio(false);
+        setOpcionCorrecta(null);
+        setOpcionSeleccionada(null);
     }
     
     if(!preguntas) {
@@ -106,11 +115,17 @@ export default function Menu() {
                 <div className="pregunta">
                     <span>{preguntas[preguntaActual-1].question}</span>
                     <div className="options">
-                        {opciones(preguntas[preguntaActual-1]).map(([key, value]) =>(
-                            <div id={key} key={key} className="option" onClick={() => respondio ? null : handleAnswer(preguntas[preguntaActual-1].id, key)}>
-                                <span>{value}</span>
-                            </div>
-                        ))}
+                        {opciones(preguntas[preguntaActual-1]).map(([key, value]) =>{
+                            let clase = "option";
+                            if(respondio && key === opcionSeleccionada) {
+                                 opcionCorrecta ? clase += " correcta" : clase += " incorrecta";
+                            }
+                            return (
+                                <div id={key} key={key} className={clase} onClick={() => respondio ? null : handleAnswer(preguntas[preguntaActual-1].id, key)}>
+                                    <span>{value}</span>
+                                </div>
+                            )                   
+                        })}
                     </div>
                 </div>
                 <div className="footer">

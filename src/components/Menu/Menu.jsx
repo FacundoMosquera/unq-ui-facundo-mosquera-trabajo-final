@@ -39,6 +39,7 @@ export default function Menu() {
     .filter(([key]) => key.startsWith("option"));
 
     const handleAnswer = (id, option) => {
+        setLoading(true);
         fetch(`https://preguntados-api.vercel.app/api/answer`,{
             method: "POST",
             headers: {
@@ -55,15 +56,23 @@ export default function Menu() {
             setRespondio(true);
             })
         .catch(err => console.log("Ocurrió un error al enviar la respuesta", err))
+        .finally(() => setLoading(false));
     }
 
     const handleNextQuestion = () => {
         if(preguntaActual === preguntasTotales) {
-
+            setPreguntas([]);
         } else {
             setPreguntaActual(prev => prev + 1);
             setRespondio(false);
         }
+    }
+
+    const handlePlayAgain = () => {
+        setPreguntaActual(1);
+        setPreguntasAcertadas(0);
+        setPreguntasTotales(0);
+        setPreguntas(null);
     }
     
     if(!preguntas) {
@@ -105,9 +114,24 @@ export default function Menu() {
                     </div>
                 </div>
                 <div className="footer">
-                    <button onClick={handleNextQuestion} disabled={!respondio}>Siguiente pregunta</button>
+                    <button onClick={handleNextQuestion} disabled={!respondio}>{loading ? "Analizando" : "Siguiente pregunta"}</button>
                 </div>
             </div>
         )
+    }
+
+    if(preguntas.length === 0 && respondio) {
+        return(
+            <div className="menu">
+                <div className="goodbye_text">
+                    <h2>Has respondido correctamente</h2>
+                    {preguntasAcertadas} / {preguntasTotales}
+                    <h2>preguntas</h2>
+                </div>
+                <div className="botones">
+                    <button onClick={handlePlayAgain}>Volver a jugar</button>
+                </div>
+            </div>
+        );
     }
 }

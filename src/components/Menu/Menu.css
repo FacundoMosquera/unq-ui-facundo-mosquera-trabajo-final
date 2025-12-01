@@ -1,8 +1,8 @@
 .menu {
+    font-family: "Montserrat", sans-serif;
     width: 500px;
     height: 500px;
     border-radius: 20px;
-    border: 2px blueviolet solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,6 +11,14 @@
     z-index: 0;
     overflow: hidden;
     gap: 20px;
+    background: var(--primary-background-color);
+    color: var(--primary-text-color);
+    z-index: 1;
+    box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.menu > .bienvenida {
+    color: var(--primary-text-color);
 }
 
 .dificultades {
@@ -20,7 +28,7 @@
 }
 
 .opcion {
-    transition: transform 0.1s ease-out;
+    transition: transform 0.3s ease-out;
     cursor: pointer;
 }
 
@@ -28,9 +36,27 @@
     transform: translateY(-5px);
 }
 
+/* PREGUNTAS  */
+.indicadores {
+    margin-right: auto;
+}
+
+.pregunta {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 50%;
+}
+
+#pregunta {
+    height: 30%;
+    text-align: center;
+}
+
 
 .option {
-    border: 1px black solid;
+    border: 1px white solid;
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
@@ -58,3 +84,34 @@
     background: #f44336;
     color: white;
 }
+
+.boton {
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+
+}
+
+.resultado {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    font-weight: 500;
+}
+
+.resultado h2 {
+    margin: 8px;
+}
+
+.click-anim {
+    animation: bounce 0.25s ease-out;
+}
+
+@keyframes bounce {
+    0%   {transform: scale(1);}
+    30%  {transform: scale(0.9);}
+    60%  {transform: scale(1.1);}
+    100% {transform: scale(1);}
+} 

@@ -12,7 +12,8 @@ export default function Menu() {
     const [respondio, setRespondio]       = useState(false);
     const { setDificultad, preguntasTotales, setPreguntasTotales, setPreguntaActual, preguntaActual, preguntasAcertadas, setPreguntasAcertadas } = usePreguntas();
     const [opcionCorrecta, setOpcionCorrecta] = useState(null);
-    const [opcionSeleccionada, setOpcionSeleccionada] = useState(null)
+    const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
+    const [animar, setAnimar] = useState(null);
     
     useEffect(() => {
         fetch("https://preguntados-api.vercel.app/api/difficulty")
@@ -42,6 +43,10 @@ export default function Menu() {
 
     const handleAnswer = (id, option) => {
         setLoading(true);
+        setAnimar(option);
+        setTimeout(()=> {
+            setAnimar(null);
+        }, 300);
         setOpcionSeleccionada(option);
         fetch(`https://preguntados-api.vercel.app/api/answer`,{
             method: "POST",
@@ -105,23 +110,21 @@ export default function Menu() {
 
 
     if(preguntas.length > 0 ) {
-        console.log(preguntas);
-        console.log(preguntasAcertadas)
         return(
             <div className="menu">
                 <div className="indicadores">
-                    <span>{preguntaActual}/{preguntasTotales}</span>
+                    <span>Pregunta {preguntaActual}/{preguntasTotales}</span>
                 </div>
                 <div className="pregunta">
-                    <span>{preguntas[preguntaActual-1].question}</span>
+                    <span id="pregunta">{preguntas[preguntaActual-1].question}</span>
                     <div className="options">
                         {opciones(preguntas[preguntaActual-1]).map(([key, value]) =>{
                             let clase = "option";
                             if(respondio && key === opcionSeleccionada) {
-                                 opcionCorrecta ? clase += " correcta" : clase += " incorrecta";
+                                 clase += opcionCorrecta ? " correcta" : " incorrecta";
                             }
                             return (
-                                <div id={key} key={key} className={clase} onClick={() => respondio ? null : handleAnswer(preguntas[preguntaActual-1].id, key)}>
+                                <div id={key} key={key} className={clase + ` ${animar=== key ? "click-anim": ""}`} onClick={() => respondio ? null : handleAnswer(preguntas[preguntaActual-1].id, key)} style={respondio ? {cursor: "default"} : null}>
                                     <span>{value}</span>
                                 </div>
                             )                   
@@ -129,7 +132,7 @@ export default function Menu() {
                     </div>
                 </div>
                 <div className="footer">
-                    <button onClick={handleNextQuestion} disabled={!respondio}>{loading ? "Analizando" : "Siguiente pregunta"}</button>
+                    <button className="boton" onClick={handleNextQuestion} disabled={!respondio}>{loading ? "Analizando" : "Siguiente pregunta"}</button>
                 </div>
             </div>
         )
@@ -138,13 +141,13 @@ export default function Menu() {
     if(preguntas.length === 0 && respondio) {
         return(
             <div className="menu">
-                <div className="goodbye_text">
+                <div className="resultado">
                     <h2>Has respondido correctamente</h2>
-                    {preguntasAcertadas} / {preguntasTotales}
+                    <h2>{preguntasAcertadas} / {preguntasTotales}</h2>
                     <h2>preguntas</h2>
                 </div>
                 <div className="botones">
-                    <button onClick={handlePlayAgain}>Volver a jugar</button>
+                    <button className="boton" onClick={handlePlayAgain}>Volver a jugar</button>
                 </div>
             </div>
         );

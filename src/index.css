@@ -8,12 +8,32 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #eeeeeee3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+
+  --primary-background-color: #eeeeeee3;
+
+  --primary-text-color: rgba(50, 50, 50, 1);
+  --secondary-text-color: rgba(115, 115, 115, 1);
+  
+  --primary-border-color: #CCCCCC;
+  --secondary-border-color: #323232;
+}
+
+[data-theme="dark"] {
+  --primary-background-color: #242424;
+
+  --primary-text-color: #FFFFFF;
+  
+  --primary-border-color: #FFFFFF;
+  --secondary-border-color: #FFFFFF;
 }
 
 body, html {

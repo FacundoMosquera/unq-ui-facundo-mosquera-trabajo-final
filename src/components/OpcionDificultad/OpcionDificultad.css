@@ -1,8 +1,9 @@
 .opcion_dificultad {
-    border: 1px black solid;
+    border: 1px var(--primary-border-color) solid;
     border-radius: 8px;
     display: flex;
     justify-content: center;
+    align-items: center;
     min-height: 40px;
     min-width: 20vh;
 }
@@ -10,4 +11,5 @@
 
 .opcion_dificultad > span {
     font-size: large;
+    color: var(--primary-text-color);
 }

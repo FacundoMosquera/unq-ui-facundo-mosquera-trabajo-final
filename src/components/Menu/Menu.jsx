@@ -114,6 +114,7 @@ export default function Menu() {
             <div className="menu">
                 <div className="indicadores">
                     <span>Pregunta {preguntaActual}/{preguntasTotales}</span>
+                    <span id="volver" onClick={handlePlayAgain}>Volver al menú</span>
                 </div>
                 <div className="pregunta">
                     <span id="pregunta">{preguntas[preguntaActual-1].question}</span>

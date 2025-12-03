@@ -8,9 +8,10 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    padding: 1.5rem;
     z-index: 0;
     overflow: hidden;
-    gap: 20px;
+    gap: 30px;
     background: var(--primary-background-color);
     color: var(--primary-text-color);
     z-index: 1;
@@ -38,8 +39,26 @@
 
 /* PREGUNTAS  */
 .indicadores {
-    margin-right: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
+
+#volver {
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block;
+}
+
+#volver:hover {
+    background: linear-gradient(to right, #070aafd0, #044dd4);
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}   
 
 .pregunta {
     width: 70%;
@@ -60,10 +79,28 @@
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
+    position: relative;
+    min-height: 30px;
 }
 
-.option:hover {
-    opacity: 0.7;
+.option::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #070aafd0, #044dd4);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+}
+
+.option:hover::before {
+    opacity: 1;
+    cursor: pointer;
 }
 
 

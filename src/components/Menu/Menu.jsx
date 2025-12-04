@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Menu.css";
 import OpcionDificultad from "../OpcionDificultad/OpcionDificultad";
 import { usePreguntas } from "../../contexts/Preguntas";
+import apiService from "../../service/api.js";
 
 
 
@@ -16,7 +17,7 @@ export default function Menu() {
     const [animar, setAnimar] = useState(null);
     
     useEffect(() => {
-        fetch("https://preguntados-api.vercel.app/api/difficulty")
+        apiService.getDifficulties()
         .then(res => res.json())
         .then(data => setDificultades(data))
         .catch(err => console.log("Ocurrió un error al recuperar las dificultades", err))
@@ -27,7 +28,7 @@ export default function Menu() {
     const handleDifficulty = (dif) => {
         setLoading(true);
         setDificultad(dif);
-        fetch(`https://preguntados-api.vercel.app/api/questions?difficulty=${dif}`)
+        apiService.getQuestions(dif)
         .then(res => res.json())
         .then(data => {
             setPreguntas(data);
@@ -48,16 +49,7 @@ export default function Menu() {
             setAnimar(null);
         }, 300);
         setOpcionSeleccionada(option);
-        fetch(`https://preguntados-api.vercel.app/api/answer`,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                questionId: id,
-                option: option
-            })
-        })
+        apiService.getAnswer(id, option)
         .then(res => res.json())
         .then(data => {
             data.answer ? setPreguntasAcertadas(prev => prev + 1) : null;

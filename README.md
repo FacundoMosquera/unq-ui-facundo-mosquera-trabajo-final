@@ -6,14 +6,24 @@ El presente proyecto simula un juego de preguntados (trivia quiz), donde el usua
 - Tener instalado node.js
 
 ## Instalación
-El primer paso para poder jugar es instalar el proyecto localmente. Para esto deberemos clonar el repositorio en una carpeta de nuestro sistema.
-La forma más sencilla de clonarlo es copiando la URL que nos proporciona el botón verde "Code<>", darle click derecho al lugar del directorio que en donde querramos tener el repositorio y ejecutar git bash. Una vez abierta la terminal, basta con ejecutar el commando [git clone "url"], donde en el lugar de "url" irá la dirección que copiamos.
 
-![Imagen de code<> de github](https://docs.github.com/assets/cb-60499/images/help/repository/https-url-clone-cli.png)
+Para instalar el proyecto deberemos abrir git bash en el directorio que deseemos y ejecutar los siguientes comandos:
 
-El último paso de nuestra instalación consiste en entrar a la carpeta del repositorio creado recientemente, abrir git bash dentro y ejecutar la linea [npm install]. Esto descargará las dependencias necesarias para poder levantar el proyecto.
+```bash
+git clone https://github.com/FacundoMosquera/unq-ui-facundo-mosquera-trabajo-final.git
+```
 
-Hecho esto tendremos el proyecto instalado en nuestra computadora, para ejecutarlo, deberemos introducir la linea [npm run dev] en nuestra terminal de git.
+Entraremos a la carpeta instalada y a continuación instalaremos las depencias que necesita el proyecto:
+
+```bash
+npm install
+```
+
+Por último levantaremos el proyecto con:
+
+```bash
+npm run dev
+```
 
 ## ¿Cómo jugar?
 Levantado el proyecto, iremos a la dirección que nos indicará la consola (generalmente el localhost:5173) y nos recibirá el menú principal de Preguntados. En este podremos elegir la dificultad de las preguntas que deberemos contestar.
@@ -24,3 +34,4 @@ Veremos en pantalla la pregunta actual y sus cuatro opciones abajo de esta, arri
 Al elegir una de las opciones, la aplicación nos mostrará si hemos elegido correctamente la respuesta mediante el rellenado de un color (verde si fue correcta y rojo en si no lo fue).
 
 Habiendo contestado todas las preguntas, se nos mostrará en pantalla un mensaje final indicando cuantos preguntas hemos acertado del total y un botón para volver al menú de selección de dificultad.
+

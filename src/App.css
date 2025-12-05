@@ -4,4 +4,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("../src/assets/images/peakpx.jpg");
+}
+
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 373px;
+}
+
+.wave .shape-fill {
+    fill: url(#waveGradient);
 }

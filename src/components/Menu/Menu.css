@@ -12,10 +12,11 @@
     z-index: 0;
     overflow: hidden;
     gap: 30px;
-    background: var(--primary-background-color);
+    background: rgba(255, 255, 255, 0.2);
     color: var(--primary-text-color);
     z-index: 1;
-    box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 20px rgba(20, 10, 40, 0.3);
+    backdrop-filter: blur(20px);
 }
 
 .menu > .bienvenida {
@@ -26,15 +27,6 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
-
-.opcion {
-    transition: transform 0.3s ease-out;
-    cursor: pointer;
-}
-
-.opcion:hover {
-    transform: translateY(-5px);
 }
 
 /* PREGUNTAS  */
@@ -52,7 +44,7 @@
 }
 
 #volver:hover {
-    background: linear-gradient(to right, #070aafd0, #044dd4);
+    background: linear-gradient(to right, #0b7fb4, #09b1ff);
     -webkit-background-clip: text;
     background-clip: text;
 
@@ -75,7 +67,7 @@
 
 
 .option {
-    border: 1px white solid;
+    border: 2px white solid;
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
@@ -86,10 +78,10 @@
 .option::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: 0px;
     padding: 2px;
     border-radius: inherit;
-    background: linear-gradient(to right, #070aafd0, #044dd4);
+    background: linear-gradient(to right, #0b7fb4, #09b1ff);
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -98,9 +90,14 @@
     opacity: 0;
 }
 
+.option:hover {
+    border: transparent;
+}
+
 .option:hover::before {
     opacity: 1;
     cursor: pointer;
+    
 }
 
 
@@ -126,8 +123,17 @@
     width: 200px;
     height: 35px;
     cursor: pointer;
-
+    background: linear-gradient(to right, #0b7fb4, #09b1ff);
+    border: none;
+    color: white;
+    border-radius: 20px;
 }
+
+.boton:hover {
+    opacity: 0.7;
+}
+
+
 
 .resultado {
     display: flex;
@@ -140,6 +146,11 @@
 
 .resultado h2 {
     margin: 8px;
+    text-align: center;
+}
+
+.resultado span {
+    margin-bottom: 15px;
 }
 
 .click-anim {

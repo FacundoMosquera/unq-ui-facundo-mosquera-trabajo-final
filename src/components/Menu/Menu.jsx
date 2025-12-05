@@ -11,7 +11,7 @@ export default function Menu() {
     const [loading, setLoading]           = useState(true);
     const [preguntas, setPreguntas]       = useState(null);
     const [respondio, setRespondio]       = useState(false);
-    const { setDificultad, preguntasTotales, setPreguntasTotales, setPreguntaActual, preguntaActual, preguntasAcertadas, setPreguntasAcertadas } = usePreguntas();
+    const { setDificultad, preguntasTotales, setPreguntasTotales, setPreguntaActual, preguntaActual, preguntasAcertadas, setPreguntasAcertadas, dificultad } = usePreguntas();
     const [opcionCorrecta, setOpcionCorrecta] = useState(null);
     const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
     const [animar, setAnimar] = useState(null);
@@ -117,7 +117,7 @@ export default function Menu() {
                                  clase += opcionCorrecta ? " correcta" : " incorrecta";
                             }
                             return (
-                                <div id={key} key={key} className={clase + ` ${animar=== key ? "click-anim": ""}`} onClick={() => respondio ? null : handleAnswer(preguntas[preguntaActual-1].id, key)} style={respondio ? {cursor: "default"} : null}>
+                                <div id={key} key={key} className={clase + ` ${animar=== key ? "click-anim": ""}`} onClick={() => respondio ? null : handleAnswer(preguntas[preguntaActual-1].id, key)}>
                                     <span>{value}</span>
                                 </div>
                             )                   
@@ -125,7 +125,7 @@ export default function Menu() {
                     </div>
                 </div>
                 <div className="footer">
-                    <button className="boton" onClick={handleNextQuestion} disabled={!respondio}>{loading ? "Analizando" : "Siguiente pregunta"}</button>
+                    <button className="boton" onClick={handleNextQuestion} style={!respondio ? {cursor: "not-allowed", opacity: 0.5} : null} disabled={!respondio}>{loading ? "Analizando" : "Siguiente pregunta"}</button>
                 </div>
             </div>
         )
@@ -135,9 +135,11 @@ export default function Menu() {
         return(
             <div className="menu">
                 <div className="resultado">
+                    <span>Dificultad elegida: {dificultad}</span>
                     <h2>Has respondido correctamente</h2>
                     <h2>{preguntasAcertadas} / {preguntasTotales}</h2>
                     <h2>preguntas</h2>
+                    
                 </div>
                 <div className="botones">
                     <button className="boton" onClick={handlePlayAgain}>Volver a jugar</button>

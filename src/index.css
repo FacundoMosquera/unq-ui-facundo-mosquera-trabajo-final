@@ -20,11 +20,14 @@
 
   --primary-background-color: #eeeeeee3;
 
-  --primary-text-color: rgba(50, 50, 50, 1);
+  --primary-text-color: rgb(37, 37, 37);
   --secondary-text-color: rgba(115, 115, 115, 1);
   
   --primary-border-color: #CCCCCC;
-  --secondary-border-color: #323232;
+  --secondary-border-color: #222121;
+  --hue-primary: 223;
+  --dark-gray50: hsl(var(--hue-primary), 90%, 5%);
+  --dark-gray100: hsl(var(--hue-primary), 90%, 10%);
 }
 
 [data-theme="dark"] {

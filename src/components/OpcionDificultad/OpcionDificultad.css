@@ -1,15 +1,28 @@
 .opcion_dificultad {
-    border: 1px var(--primary-border-color) solid;
+    border: none;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 40px;
     min-width: 20vh;
+    background: linear-gradient(to right, #0b7fb4, #09b1ff);
+    box-shadow: 0px 8px 32px 0 rgba(31, 38, 135, 0.1);
+    backdrop-filter: blur(20px);
+    color: var(--secondary-text-color);
 }
 
 
 .opcion_dificultad > span {
     font-size: large;
-    color: var(--primary-text-color);
+    color: #FFFFFF;
+}
+
+.opcion {
+    transition: transform 0.1s ease-out;
+    cursor: pointer;
+}
+
+.opcion:hover {
+    transform: translateY(-5px);
 }
